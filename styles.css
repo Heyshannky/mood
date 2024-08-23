@@ -1,0 +1,174 @@
+:root {
+    --primary-bg: #ffffff;
+    --envelope-bg: #f8bbd0;
+    --envelope-tab: #f48fb1;
+    --envelope-cover: #fce4ec;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --text-color: #333;
+    --heart-color: #e91e63;
+    --outside-text-color: #fff;
+    --outside-text-size: 24px; /* Adjusted for visibility */
+    --letter-bg: #ffffff;
+    --letter-text-color: #333;
+    --font-size-inner: 16px; /* Increased font size for readability */
+    --envelope-width: 350px; /* Increased size */
+    --envelope-height: 270px; /* Increased size */
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: #eceff1; /* Light background to contrast with image */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-family: 'Arial', sans-serif;
+    overflow: hidden;
+}
+
+.background {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.background-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    opacity: 0.6; /* Adjusted transparency for the background image */
+}
+
+.outside-text {
+    color: var(--outside-text-color);
+    font-size: var(--outside-text-size);
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+    z-index: 1;
+    position: relative;
+}
+
+.container {
+    height: auto;
+    display: grid;
+    place-items: center;
+    position: relative;
+}
+
+.envelope-wrapper {
+    background: var(--envelope-bg);
+    box-shadow: 0 0 40px var(--shadow-color);
+    position: relative;
+    width: var(--envelope-width); /* Increased size */
+    height: var(--envelope-height); /* Increased size */
+}
+
+.envelope {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.envelope::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    z-index: 2;
+    border-top: 130px solid var(--envelope-tab);
+    border-right: 175px solid transparent; /* Increased size */
+    border-left: 175px solid transparent; /* Increased size */
+    transform-origin: top;
+    transition: all 0.5s ease-in-out 0.7s;
+}
+
+.envelope::after {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    width: 0px;
+    height: 0px;
+    border-top: 130px solid transparent;
+    border-right: 175px solid var(--envelope-cover); /* Increased size */
+    border-bottom: 120px solid var(--envelope-cover); /* Increased size */
+    border-left: 175px solid var(--envelope-cover); /* Increased size */
+}
+
+.letter {
+    position: absolute;
+    right: 10%;
+    bottom: 10%;
+    width: 80%; /* Increased width for better content display */
+    height: 70%; /* Adjusted height for content */
+    background: var(--letter-bg);
+    text-align: center;
+    transition: all 1s ease-in-out;
+    box-shadow: 0 0 5px var(--shadow-color);
+    padding: 20px;
+    overflow-y: auto; /* Scrollable content if it overflows */
+}
+
+.text {
+    color: var(--letter-text-color);
+    text-align: left;
+    font-size: var(--font-size-inner); /* Increased font size */
+    line-height: 1.6; /* Improved readability */
+}
+
+.heart {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 30px; /* Increased size */
+    height: 30px; /* Increased size */
+    background: var(--heart-color);
+    z-index: 4;
+    transform: translate(-50%, -50%) rotate(45deg);
+    transition: transform 0.5s ease-in-out 1s;
+    box-shadow: 0 1px 6px var(--shadow-color);
+    cursor: pointer;
+}
+
+.heart:before,
+.heart:after {
+    content: "";
+    position: absolute;
+    width: 30px; /* Increased size */
+    height: 30px; /* Increased size */
+    background-color: var(--heart-color);
+    border-radius: 50%;
+}
+
+.heart:before {
+    top: -15px;
+}
+
+.heart:after {
+    right: 15px;
+}
+
+.flap .envelope::before {
+    transform: rotateX(180deg);
+    z-index: 0;
+}
+
+.flap .letter {
+    bottom: 100px;
+    transform: scale(1.5);
+    transition-delay: 1s;
+}
+
+.flap .heart {
+    transform: rotate(90deg);
+    transition-delay: 0.4s;
+}
